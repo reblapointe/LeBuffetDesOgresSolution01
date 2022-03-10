@@ -20,21 +20,20 @@ namespace Cuisine
         public const int TAILLE_PLAT_MOYEN = 5000;
         public const int TEMPS_MOYEN_PREPARATION_PLAT = 800;
 
-        private readonly string[] plats;
+        private readonly string[] banqueDePlats;
 
         static readonly Random rand = new Random();
 
         public Cuisine()
         {
             Contexte = new BuffetBDContext();
-            plats = new string[] {
+            banqueDePlats = new string[] {
                 "Asperge", "Artichaut", "Aubergine", "Betterave", "Beurre", "Brocoli", "Cambembert", "Chataîgne", "Carotte",
                 "Datte", "Echalote", "Epinard", "Fenouil", "Fève", "Figue", "Grenade", "Groseille", "Goyave",
                 "Haricot", "Huitre", "Kiwi", "Laitue", "Lentille", "Lait de vache", "Mais", "Mangue", "Melon",
                 "Navet", "Noix de coco", "Oeuf", "Orange", "Pain", "Patate", "Poireau", "Radis", "Raisin", "Riz",
                 "Sardine", "Saumon", "Tomate", "Yogourt" };
         }
-
 
         public void Tour()
         {
@@ -51,7 +50,7 @@ namespace Cuisine
             return new Plats
             {
                 Taille = (int)DistributionExponentielle(TAILLE_PLAT_MOYEN),
-                Nom = plats[rand.Next(0, plats.Length)],
+                Nom = banqueDePlats[rand.Next(0, banqueDePlats.Length)],
                 DateCreation = DateTime.Now,
             };
         }

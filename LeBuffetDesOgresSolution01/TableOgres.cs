@@ -29,13 +29,11 @@ namespace Ogres
                 ogres.Add(o);
                 o.Annoncer += Update; 
                 Task task = new Task(o.Demarrer);
-                task.ContinueWith(
+                task.ContinueWith( // Gestion des exception si une tâche échoue
                     (t) => Console.Error.WriteLine(t.Exception), 
                     TaskContinuationOptions.OnlyOnFaulted);
                 task.Start();
-
             }
-
             Update();
         }
 

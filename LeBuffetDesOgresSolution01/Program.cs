@@ -6,7 +6,6 @@ namespace Ogres
 {
     class Program
     {
-        private static readonly object verrouAffichage = new object();
 
         static void Main(string[] args)
         {
@@ -14,7 +13,7 @@ namespace Ogres
             try
             {
                 TableOgres p = new TableOgres();
-                p.Afficher = RafraichirConsole;
+                p.Afficher = (s) => { Console.Clear(); Console.WriteLine(s); };
                 p.Start();
             }
             catch (Exception e)
@@ -22,15 +21,6 @@ namespace Ogres
                 Console.Error.WriteLine(e);
             }
             Console.ReadKey();
-        }
-
-        public static void RafraichirConsole(string s)
-        {
-            lock (verrouAffichage)
-            {
-               // Console.Clear();
-                Console.WriteLine(s);
-            }
         }
     }
 }
