@@ -9,7 +9,7 @@ namespace Ogres
 {
     class TableOgres
     {
-        private static readonly object verrouUpdate = new object();
+        private static readonly object verrouMiseAJour = new object();
         public const int NB_OGRES = 7;
 
         private List<Ogre> ogres;
@@ -27,19 +27,19 @@ namespace Ogres
             {
                 Ogre o = new Ogre("Ogre #" + i);
                 ogres.Add(o);
-                o.Annoncer += Update; 
+                o.AnnoncerChangement += MiseAJour; 
                 Task task = new Task(o.Demarrer);
                 task.ContinueWith( // Gestion des exception si une tâche échoue
                     (t) => Console.Error.WriteLine(t.Exception), 
                     TaskContinuationOptions.OnlyOnFaulted);
                 task.Start();
             }
-            Update();
+            MiseAJour();
         }
 
-        public void Update()
+        public void MiseAJour()
         {
-            lock (verrouUpdate)
+            lock (verrouMiseAJour)
             {
                 string s = "";
 

@@ -10,7 +10,7 @@ namespace Cuisine
             {
                 Console.WriteLine("Console de la cuisine");
                 Cuisine cuisine = new Cuisine();
-                cuisine.Notifier = Console.WriteLine;
+                cuisine.AnnoncerChangement = Console.WriteLine;
                 while (true) // Cuisine éternelle
                     cuisine.Tour();
             }

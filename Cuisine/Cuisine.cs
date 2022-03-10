@@ -15,7 +15,7 @@ namespace Cuisine
     {
         public BuffetBDContext Contexte { get; set; }
 
-        public Action<string> Notifier { get; set; }
+        public Action<string> AnnoncerChangement { get; set; }
 
         public const int TAILLE_PLAT_MOYEN = 5000;
         public const int TEMPS_MOYEN_PREPARATION_PLAT = 800;
@@ -40,7 +40,7 @@ namespace Cuisine
             Plats c = NouveauPlat();
             Contexte.Plats.Add(c);
             Contexte.SaveChanges();
-            Notifier(c.ToString());
+            AnnoncerChangement(c.ToString());
 
             Thread.Sleep((int)DistributionExponentielle(TEMPS_MOYEN_PREPARATION_PLAT));
         }

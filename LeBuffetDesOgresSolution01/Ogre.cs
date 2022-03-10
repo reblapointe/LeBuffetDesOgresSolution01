@@ -14,7 +14,7 @@ namespace Ogres
 
         public string Name { get; set; }
 
-        public Action Annoncer { get; set; }
+        public Action AnnoncerChangement { get; set; }
 
         private readonly BuffetBDContext contexte = new BuffetBDContext();
 
@@ -33,7 +33,7 @@ namespace Ogres
                 bool etatChange = platSeFaisantManger != null;
 
                 if (etatChange)
-                    Annoncer();
+                    AnnoncerChangement();
 
                 // Attendre 10 millisecondes si le plat est nul, sinon on va bombarder la BD
                 Thread.Sleep(etatChange ? platSeFaisantManger.Taille : 10);
@@ -41,7 +41,7 @@ namespace Ogres
                 platSeFaisantManger = null;
 
                 if (etatChange)
-                    Annoncer();
+                    AnnoncerChangement();
             }
         }
 
