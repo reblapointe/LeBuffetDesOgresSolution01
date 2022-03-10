@@ -17,7 +17,7 @@ namespace Ogres
                 p.Afficher = (s) =>
                 {
                     Console.Clear();
-                    Console.WriteLine(ImprimerInfoThread() + Environment.NewLine + s);
+                    Console.WriteLine(InfoThread() + Environment.NewLine + s);
                 };
                 p.DemarrerOgres();
             }
@@ -28,7 +28,7 @@ namespace Ogres
             Console.ReadKey();
         }
 
-        public static string ImprimerInfoThread()
+        public static string InfoThread()
         {
             Thread t = Thread.CurrentThread;
             return $"[Thread ID : {t.ManagedThreadId} , " +
