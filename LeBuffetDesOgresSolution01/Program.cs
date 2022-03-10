@@ -28,7 +28,7 @@ namespace Ogres
         {
             lock (verrouAffichage)
             {
-                Console.Clear();
+               // Console.Clear();
                 Console.WriteLine(s);
             }
         }

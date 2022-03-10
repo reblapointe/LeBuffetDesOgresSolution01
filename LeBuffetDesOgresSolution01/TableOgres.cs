@@ -2,12 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Ogres
 {
     class TableOgres
     {
+        private static readonly object verrouUpdate = new object();
         public const int NB_OGRES = 7;
 
         private List<Ogre> ogres;
@@ -25,8 +27,13 @@ namespace Ogres
             {
                 Ogre o = new Ogre("Ogre #" + i);
                 ogres.Add(o);
-                o.Annoncer += Update;
-                Task.Run(o.Demarrer);
+                o.Annoncer += Update; 
+                Task task = new Task(o.Demarrer);
+                task.ContinueWith(
+                    (t) => Console.Error.WriteLine(t.Exception), 
+                    TaskContinuationOptions.OnlyOnFaulted);
+                task.Start();
+
             }
 
             Update();
@@ -34,14 +41,17 @@ namespace Ogres
 
         public void Update()
         {
-            string s = "";
+            lock (verrouUpdate)
+            {
+                string s = "";
 
-            ogres.ForEach(o => s += o.ToString() + Environment.NewLine);
-            s += Environment.NewLine + "Table :" + Environment.NewLine;
+                ogres.ForEach(o => s += o.ToString() + Environment.NewLine);
+                s += Environment.NewLine + "Table :" + Environment.NewLine;
 
-            foreach (Plat p in contexte.Plats)
-                s += p + Environment.NewLine;
-            Afficher(s);
+                foreach (Plat p in contexte.Plats)
+                    s += p + Environment.NewLine;
+                Afficher(s);
+            }
         }
     }
 }

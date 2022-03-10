@@ -30,14 +30,19 @@ namespace Ogres
             while (true) // Manger pour l'éternité
             {
                 platSeFaisantManger = PrendrePlat();
-                Annoncer();
+                bool etatChange = platSeFaisantManger != null;
+                
+                if (etatChange) 
+                    Annoncer();
 
-                int tempsDAttente = platSeFaisantManger is null ? 10 : platSeFaisantManger.Taille;
                 // Attendre 10 millisecondes si le plat est nul, sinon on va bombarder la BD
+                int tempsDAttente = platSeFaisantManger is null ? 10 : platSeFaisantManger.Taille;
                 Thread.Sleep(tempsDAttente);
                 
                 platSeFaisantManger = null;
-                Annoncer();
+
+                if (etatChange) 
+                    Annoncer();
             }
         }
 
@@ -45,34 +50,22 @@ namespace Ogres
         {
             Plat p = null;
 
-            lock (verrouChoixPlat)
+            lock (verrouChoixPlat) // Verrou partagé avec tous les ogres
             {
-                if (Name.Contains("1"))
+                try
                 {
-
+                    p = contexte.Plats.FirstOrDefault();
+                    if (p != null)
+                    {
+                        contexte.Plats.Remove(p);
+                        contexte.SaveChanges();
+                    }
                 }
-                else if (Name.Contains("2"))
+                catch(Exception e)
                 {
-
+                    Console.Error.WriteLine(e);
                 }
-                else if (Name.Contains("3"))
-                {
-
-                }
-                else if (Name.Contains("4"))
-                {
-
-                }
-                else if (Name.Contains("5"))
-                {
-
-                }
-                p = contexte.Plats.FirstOrDefault();
-                if (p != null)
-                {
-                    contexte.Plats.Remove(p);
-                    contexte.SaveChanges();
-                }
+               
             }
             return p;
         }
