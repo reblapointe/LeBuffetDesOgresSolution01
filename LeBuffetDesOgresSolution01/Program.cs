@@ -14,7 +14,7 @@ namespace Ogres
             {
                 TableOgres p = new TableOgres();
                 p.Afficher = (s) => { Console.Clear(); Console.WriteLine(s); };
-                p.Start();
+                p.DemarrerOgres();
             }
             catch (Exception e)
             {

@@ -19,7 +19,7 @@ namespace Ogres
 
         public TableOgres() { }
 
-        public void Start()
+        public void DemarrerOgres()
         {
             ogres = new List<Ogre>();
 
