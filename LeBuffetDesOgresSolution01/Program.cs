@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace Ogres
 {
@@ -13,7 +14,11 @@ namespace Ogres
             try
             {
                 TableOgres p = new TableOgres();
-                p.Afficher = (s) => { Console.Clear(); Console.WriteLine(s); };
+                p.Afficher = (s) =>
+                {
+                    Console.Clear();
+                    Console.WriteLine(ImprimerInfoThread() + Environment.NewLine + s);
+                };
                 p.DemarrerOgres();
             }
             catch (Exception e)
@@ -21,6 +26,14 @@ namespace Ogres
                 Console.Error.WriteLine(e);
             }
             Console.ReadKey();
+        }
+
+        public static string ImprimerInfoThread()
+        {
+            Thread t = Thread.CurrentThread;
+            return $"[Thread ID : {t.ManagedThreadId} , " +
+                $"Priorité : {t.Priority}, " +
+                $"Est background : {t.IsBackground}]";
         }
     }
 }
