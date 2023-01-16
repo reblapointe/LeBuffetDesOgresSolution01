@@ -8,16 +8,19 @@ namespace Ogres
     class Program
     {
 
-        static void Main(string[] args)
+        static void Main(string[] _)
         {
             Console.WriteLine("Console des ogres");
             try
             {
-                TableOgres p = new TableOgres();
-                p.Afficher = (s) =>
+
+                TableOgres p = new()
                 {
-                    Console.Clear();
-                    Console.WriteLine(InfoThread() + Environment.NewLine + s);
+                    Afficher = (s) =>
+                    {
+                        Console.Clear();
+                        Console.WriteLine(InfoThread() + Environment.NewLine + s);
+                    }
                 };
                 p.DemarrerOgres();
             }

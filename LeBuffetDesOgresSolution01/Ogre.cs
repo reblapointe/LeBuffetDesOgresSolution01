@@ -16,9 +16,9 @@ namespace Ogres
 
         public Action AnnoncerChangement { get; set; }
 
-        private readonly BuffetBDContext contexte = new BuffetBDContext();
+        private readonly BuffetBDContext contexte = new();
 
-        private static readonly object verrouChoixPlat = new object();
+        private static readonly object verrouChoixPlat = new();
 
         public Ogre(string name)
         {

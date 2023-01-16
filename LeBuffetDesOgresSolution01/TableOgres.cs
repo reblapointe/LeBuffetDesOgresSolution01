@@ -9,12 +9,12 @@ namespace Ogres
 {
     class TableOgres
     {
-        private static readonly object verrouMiseAJour = new object();
+        private static readonly object verrouMiseAJour = new ();
         public const int NB_OGRES = 7;
 
         private List<Ogre> ogres;
 
-        private readonly BuffetBDContext contexte = new BuffetBDContext();
+        private readonly BuffetBDContext contexte = new ();
         public Action<string> Afficher { get; set; }
 
         public TableOgres() { }
@@ -25,10 +25,10 @@ namespace Ogres
 
             for (int i = 0; i < NB_OGRES; i++)
             {
-                Ogre o = new Ogre("Ogre #" + i);
+                Ogre o = new ("Ogre #" + i);
                 ogres.Add(o);
                 o.AnnoncerChangement += MiseAJour; 
-                Task task = new Task(o.Demarrer);
+                Task task = new (o.Demarrer);
                 task.ContinueWith( // Gestion des exception si une tâche échoue
                     (t) => Console.Error.WriteLine(t.Exception), 
                     TaskContinuationOptions.OnlyOnFaulted);
@@ -51,7 +51,5 @@ namespace Ogres
                 Afficher(s);
             }
         }
-
-      
     }
 }

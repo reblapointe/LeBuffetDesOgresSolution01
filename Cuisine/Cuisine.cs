@@ -22,7 +22,7 @@ namespace Cuisine
 
         private readonly string[] banqueDePlats;
 
-        static readonly Random rand = new Random();
+        static readonly Random rand = new ();
 
         public Cuisine()
         {
@@ -55,7 +55,7 @@ namespace Cuisine
             };
         }
 
-        private double DistributionExponentielle(int esperance)
+        private static double DistributionExponentielle(int esperance)
         {
             return -esperance * Math.Log(1 - rand.NextDouble());
         }

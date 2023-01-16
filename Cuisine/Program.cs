@@ -4,13 +4,15 @@ namespace Cuisine
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main(string[] _)
         {
             try
             {
                 Console.WriteLine("Console de la cuisine");
-                Cuisine cuisine = new Cuisine();
-                cuisine.AnnoncerChangement = Console.WriteLine;
+                Cuisine cuisine = new()
+                {
+                    AnnoncerChangement = Console.WriteLine
+                };
                 while (true) // Cuisine éternelle
                     cuisine.Tour();
             }
